@@ -9,55 +9,49 @@ router.use(express.urlencoded({extended:true}))
 router.use(express.json()) 
 
 
-router.get("/", (req, res) => {                    // To retreive all the employess
-    emp.find()
-        .then(emps => {
-            res.status(200).json(emps)
-        })
-        .catch(err => {
+router.get("/", async (req, res) => {                    // To retreive all the employess
+    try{
+        const employees = await emp.find()
+        res.status(200).json(employees)
+    }catch(err) {
             res.status(500).json(err.message)
-        })
+        }
 })
 
-router.get("/:id", (req, res) => {                // To retreive an employee by ObjectID
-    const ID=req.params.id
-    emp.findById(ID)
-        .then(emps => {
-            res.status(200).json(emps)
-        })
-        .catch(err => {
+router.get("/:id", async (req, res) => {                // To retreive an employee by ObjectID
+    try{ const ID=req.params.id
+         const employ= await emp.findById(ID)
+         res.status(200).json(employ)
+        }catch(err) {
             res.status(500).json(err.message)
-        })
+        }
 })
 
-router.post("/",(req,res)=>{                       // To create a new employee
-    const empdata=new emp(req.body)
-    console.log(req.body)
-    empdata.save()
-    .then(result=>{
+router.post("/",async (req,res)=>{                       // To create a new employee
+    try{
+        const empdata=new emp(req.body)
+        const result= await empdata.save()
         res.status(200).send(result)
-    })
-    .catch(err=>{
+    }catch(err){
         res.send(err.message)
-    })
+    }
 })
 
-router.delete("/:id",(req,res)=>{                 // To delete existing employee by ObjectID
-    const ID=req.params.id
-    emp.deleteOne({_id:ID})
-    .then(result=>{
+router.delete("/:id",async (req,res)=>{                 // To delete existing employee by ObjectID
+    try{
+        const ID=req.params.id
+        const result = await emp.deleteOne({_id:ID})
         res.status(200).json(result)
-    })
-    .catch(err=>{
+    }catch(err){
         res.status(500).json(err.message)
-    })
+    }
 })
 
 
-router.put("/:id",(req,res)=>{                    // To modify existing employee by objectID
-    const ID=req.params.id
+router.put("/:id",async (req,res)=>{                    // To modify existing employee by objectID
+    try{const ID=req.params.id
     const empdata= req.body
-    emp.findByIdAndUpdate(
+    const result= await emp.findByIdAndUpdate(
         ID,
         empdata,
         {
@@ -65,12 +59,10 @@ router.put("/:id",(req,res)=>{                    // To modify existing employee
             runValidators:true
         }   
     )
-    .then(result=>{
-        res.status(200).json(result)
-    })
-    .catch(err=>{
+    res.status(200).json(result)
+    }catch(err){
         res.status(500).json(err.message)
-    })
+    }
 })
 
 
