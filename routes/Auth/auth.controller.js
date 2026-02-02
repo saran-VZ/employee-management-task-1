@@ -1,20 +1,13 @@
 require('dotenv').config()
 
-const express=require("express")
-const router=express.Router()
-
-router.use(express.json())
-router.use(express.urlencoded({extended:true})) 
-
 const user=require("/home/saran-st/Documents/task1-emp/models/user_Schema.js")
 const jwt=require("jsonwebtoken")
 
-
-router.post('/signin',async (req,res)=>{
+exports.signin=async (req,res)=>{
    try{
     const {name,email,username,password}= req.body
     const user1 = await user.findOne({ username })
-
+ 
     if(!user1){
         res.status(404).send("user not found")
     }
@@ -22,17 +15,17 @@ router.post('/signin',async (req,res)=>{
         res.status(401).send("wrong passowrd...authorization failed :(")
     }
     else{
-    const curr_user={name:username}
-    const acess_token=jwt.sign(curr_user,process.env.random_secrete_key,{expiresIn:"2m"})
+    const curr_user={username}
+    const acess_token=jwt.sign(curr_user,process.env.random_secrete_key,{expiresIn:"1m"})
     res.status(200).json({message:"login sucessfull :) ",acess_token:acess_token})
     
     }
 }catch(err){
     res.send(err.message)
 }
-})
+}
 
-router.post("/signup",async (req,res)=>{                       
+exports.signup=async (req,res)=>{                       
     try{
         const userdata=new user(req.body)
         const result= await userdata.save()
@@ -40,5 +33,5 @@ router.post("/signup",async (req,res)=>{
     }catch(err){
         res.send(err.message)
     }
-})
-module.exports=router
+}
+
