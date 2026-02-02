@@ -1,5 +1,5 @@
 const mongoose = require("mongoose")
- const emp_schema = new mongoose.Schema({
+const emp_schema = new mongoose.Schema({
     id:{
         type:Number,
         required:true,

@@ -1,28 +1,21 @@
-require('dotenv').config()
-
-const express=require("express")
-const app=express()
-
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-const emp_router=require("./API's/employee/emp.controller.js")
-const emp=require("./models/emp_schema")
-
-const auth_router=require("./API's/Auth/index.js")
-const user_Schema=require("./models/user_Schema.js")
-
-const mongoose=require("mongoose")
-mongoose.connect(process.env.mongoDB_url)
+require("dotenv").config();
+const express = require("express");
+const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use('/API',emp_router)
+const mongoose = require("mongoose");
+mongoose
+  .connect(process.env.mongoDB_url)
+  .then(() => console.log("DB connected...!!"));
 
-app.use('/API',auth_router)
+const employeeRoutes = require("./API's/employee/index.js");
+const authRoutes = require("./API's/Auth/index.js");
 
-app.listen(process.env.port,()=>{
-    console.log(`the server is running at port ${process.env.port}...!!`)
-})
+app.use("/API", employeeRoutes);
+app.use("/API", authRoutes);
 
+app.listen(process.env.port, () => {
+  console.log(`Server running at port ${process.env.port}`);
+});
