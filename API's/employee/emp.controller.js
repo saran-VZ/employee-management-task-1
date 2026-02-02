@@ -5,6 +5,7 @@ const emp=require("/home/saran-st/Documents/task1-emp/models/emp_schema.js")
 
 router.use(express.urlencoded({extended:true})) 
 router.use(express.json()) 
+router.use(express.static("./public"))  
 
 
 router.get("/", async (req, res) => {                    // To retreive all the employess
@@ -46,7 +47,7 @@ router.delete("/:id",async (req,res)=>{                 // To delete existing em
 })
 
 
-router.put("/:id",async (req,res)=>{                    // To modify existing employee by objectID
+router.put("/:id",async (req,res)=>{                    // modify existing employee by objectID
     try{const ID=req.params.id
     const empdata= req.body
     const result= await emp.findByIdAndUpdate(

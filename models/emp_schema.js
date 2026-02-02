@@ -33,7 +33,7 @@ const mongoose = require("mongoose")
         maxlength:200,
     } },
     {
-    timestamps: true,   
+    timestamps: { createdAt: "created_on", updatedAt: "modified_on" }, 
     versionKey: false   
   }
 
