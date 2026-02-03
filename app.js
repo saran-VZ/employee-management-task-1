@@ -11,8 +11,8 @@ mongoose
   .then(() => console.log("DB connected...!!"));
 
 
-const appRouter = require('./routes');
-app.use('/api', appRouter)
+const appRouter = require('./routes/index');
+app.use('/API', appRouter)
   
 
 app.listen(process.env.port, () => {

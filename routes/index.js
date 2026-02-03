@@ -4,6 +4,6 @@ const authRouter = require('./Auth')
 const employeeRouter = require('./employee')
 
 router.use('/auth', authRouter);
-router.use('/emp', employeeRouter)
+router.use('/employees', employeeRouter)
 
 module.exports = router

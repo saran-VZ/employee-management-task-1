@@ -4,7 +4,7 @@ const router = express.Router();
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
 
-const jwtAuth=require('/home/saran-st/Documents/task1-emp/JWTauth.js')
+const jwtAuth=require("../../JWTauth.js")
 
 const {get_all,get_by_id,add_new,delete_by_id,edit_by_id} = require("./emp.controller");
 router.use(jwtAuth)

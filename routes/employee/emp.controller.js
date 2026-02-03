@@ -1,5 +1,5 @@
 
-const emp=require("/home/saran-st/Documents/task1-emp/models/emp_schema.js")
+const emp=require("../../models/emp_schema.js")
 
 
 exports.get_all=async (req, res) => {                    // To retreive all the employess

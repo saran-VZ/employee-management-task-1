@@ -1,6 +1,6 @@
 require('dotenv').config()
 
-const user=require("/home/saran-st/Documents/task1-emp/models/user_Schema.js")
+const user=require("../../models/user_Schema")
 const jwt=require("jsonwebtoken")
 
 exports.signin=async (req,res)=>{
