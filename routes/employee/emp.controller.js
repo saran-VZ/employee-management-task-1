@@ -2,7 +2,7 @@
 const emp=require("../../models/emp_schema.js")
 
 
-exports.get_all=async (req, res) => {                    // To retreive all the employess
+exports.getAll=async (req, res) => {                    // To retreive all the employess
     try{
         const employees = await emp.find()
         res.status(200).json(employees)
@@ -11,7 +11,7 @@ exports.get_all=async (req, res) => {                    // To retreive all the 
         }
 }
 
-exports.get_by_id=async (req, res) => {                 // To retreive an employee by ObjectID
+exports.getById=async (req, res) => {                  // To retreive an employee by ObjectID
     try{ 
         const ID=req.params.id
         const employ= await emp.findById(ID)
@@ -21,7 +21,7 @@ exports.get_by_id=async (req, res) => {                 // To retreive an employ
         }
 }
 
-exports.add_new=async (req,res)=>{                       // To create a new employee
+exports.addNew=async (req,res)=>{                      // To create a new employee
     try{
         const empdata=new emp(req.body)
         const result= await empdata.save()
@@ -31,7 +31,7 @@ exports.add_new=async (req,res)=>{                       // To create a new empl
     }
 }
 
-exports.delete_by_id=async (req,res)=>{                  // To delete existing employee by ObjectID
+exports.deleteById=async (req,res)=>{                  // To delete existing employee by ObjectID
     try{
         const ID=req.params.id
         const result = await emp.deleteOne({_id:ID})
@@ -42,7 +42,7 @@ exports.delete_by_id=async (req,res)=>{                  // To delete existing e
 }
 
 
-exports.edit_by_id=async (req,res)=>{                    // modify existing employee by objectID
+exports.editById=async (req,res)=>{                    // modify existing employee by objectID
     try{
         const ID=req.params.id
         const empdata= req.body

@@ -1,20 +1,23 @@
 const express = require("express");
 const router = express.Router();
 
+
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
 
-const jwtAuth=require("../../JWTauth.js")
 
-const {get_all,get_by_id,add_new,delete_by_id,edit_by_id} = require("./emp.controller");
-router.use(jwtAuth)
 
-router.use(jwtAuth);
+//const jwtAuth=require("../../JWTauth.js")
+//router.use(jwtAuth)
 
-router.get('/',get_all)
-router.get('/:id',get_by_id)
-router.post('/',add_new)
-router.delete('/:id',delete_by_id)
-router.put('/:id',edit_by_id)
+const {getAll,getById,addNew,deleteById,editById} = require("./emp.controller")
+
+
+router.get('/',getAll)
+router.get('/:id',getById)
+router.post('/',addNew)
+router.delete('/:id',deleteById)
+router.put('/:id',editById)
+
 
 module.exports = router;

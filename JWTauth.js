@@ -1,13 +1,12 @@
 const jwt = require("jsonwebtoken");
 
-const jwtAuth = (req, res, next) => {
-    const authHeader = req.headers.authorization;
 
-    if (!authHeader) {
+const jwtAuth = (req, res, next) => {
+    const token = req.cookies.acess_token
+    if (!token) {
       return res.status(401).json({ message: "Token missing" });
     }
     try {
-      const token = authHeader.split(" ")[1];
       const decoded_data = jwt.verify(token, process.env.random_secrete_key);
       req.user = decoded_data;
       next();

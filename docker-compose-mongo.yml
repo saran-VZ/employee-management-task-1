@@ -1,0 +1,13 @@
+version: "3.8"
+
+services:
+  mongo:
+    image: mongo:6
+    container_name: task1_mongo
+    network_mode: host
+    volumes:
+      - ./../mongo_data:/data/db
+    restart: always
+
+volumes:
+  mongo_data:

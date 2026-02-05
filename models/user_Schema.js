@@ -24,10 +24,6 @@ const mongoose = require("mongoose")
     type: String,
     required: true,
     unique:true,
-    match: [
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-      "Password must be at least 8 characters and include uppercase, lowercase, number, and special character"
-    ]
   }},
     {
     timestamps: { createdAt: "created_on", updatedAt: "modified_on" },  
